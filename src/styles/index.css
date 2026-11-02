@@ -1,0 +1,572 @@
+:root {
+  --teal: #008080;
+  --noir: #111111;
+  --blanc: #ffffff;
+  --tomato: #ff6347;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--blanc);
+  color: var(--noir);
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  animation: apparition 0.4s ease;
+}
+
+h1 {
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Boutons */
+.btn {
+  background: var(--teal);
+  color: var(--blanc);
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn:hover {
+  background: var(--noir);
+  border-color: var(--noir);
+  transform: translateY(-2px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-contour {
+  background: var(--blanc);
+  color: var(--teal);
+}
+.btn-contour:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--blanc);
+}
+
+/* Champs */
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.champ label {
+  font-weight: 600;
+}
+.champ input {
+  padding: 10px 12px;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.champ input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.2);
+}
+.champ input.champ-ok {
+  border-color: var(--teal);
+}
+.champ input.champ-erreur {
+  border-color: var(--tomato);
+}
+.erreur {
+  color: var(--tomato);
+  font-size: 0.875rem;
+  animation: apparition 0.2s ease;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  background: var(--noir);
+}
+.logo {
+  color: var(--teal);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.menu a,
+.menu .lien {
+  background: none;
+  border: none;
+  color: var(--blanc);
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.menu a:hover,
+.menu .lien:hover,
+.menu a.active {
+  color: var(--teal);
+}
+.bonjour {
+  color: var(--teal);
+}
+.badge {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--teal);
+  color: var(--blanc);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  position: relative;
+  width: 32px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--blanc);
+  transition: transform 0.3s, opacity 0.3s, top 0.3s;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 10px; }
+.hamburger span:nth-child(3) { top: 20px; }
+.hamburger.ouvert span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+.hamburger.ouvert span:nth-child(2) { opacity: 0; }
+.hamburger.ouvert span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+
+@media (max-width: 700px) {
+  .hamburger {
+    display: block;
+  }
+  .menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background: var(--noir);
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .menu.ouvert {
+    max-height: 400px;
+    padding: 16px 20px 24px;
+  }
+}
+
+/* Formulaires */
+.formulaire {
+  max-width: 420px;
+  margin: 24px auto;
+  padding: 28px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  animation: apparition 0.4s ease;
+}
+.formulaire .btn {
+  width: 100%;
+  margin-top: 8px;
+}
+.erreur-serveur {
+  margin-bottom: 8px;
+  text-align: center;
+}
+.lien-bas {
+  margin-top: 16px;
+  text-align: center;
+}
+.lien-bas a {
+  color: var(--teal);
+  font-weight: 600;
+}
+/* Catalogue */
+.grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.carte {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid var(--noir);
+  border-radius: 16px;
+  animation: apparition 0.5s ease both;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.carte:hover {
+  transform: translateY(-6px);
+  border-color: var(--teal);
+  box-shadow: 0 8px 20px rgba(0, 128, 128, 0.25);
+}
+
+.carte-visuel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 130px;
+  background: var(--teal);
+  color: var(--blanc);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.carte-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+.carte-corps h2 {
+  font-size: 1.1rem;
+}
+.prix {
+  color: var(--teal);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.stock {
+  font-size: 0.875rem;
+  opacity: 0.65;
+}
+.carte-corps .btn {
+  margin-top: 8px;
+}
+
+/* Panier */
+.panier-vide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.panier-vide .btn {
+  text-decoration: none;
+}
+
+.panier-liste {
+  list-style: none;
+}
+.panier-ligne {
+  display: grid;
+  grid-template-columns: 1fr auto 110px auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 2px solid var(--noir);
+  border-radius: 16px;
+  animation: apparition 0.3s ease;
+  transition: border-color 0.2s;
+}
+.panier-ligne:hover {
+  border-color: var(--teal);
+}
+.panier-info h2 {
+  font-size: 1.05rem;
+}
+
+.quantite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quantite span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+.btn-rond {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  background: var(--blanc);
+  color: var(--teal);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-rond:hover:not(:disabled) {
+  background: var(--teal);
+  color: var(--blanc);
+}
+.btn-rond:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.panier-ligne .prix {
+  text-align: right;
+}
+.lien-retirer {
+  background: none;
+  border: none;
+  color: var(--noir);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lien-retirer:hover {
+  color: var(--teal);
+}
+
+.panier-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  font-size: 1.3rem;
+}
+.panier-total strong {
+  color: var(--teal);
+}
+.panier-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 700px) {
+  .panier-ligne {
+    grid-template-columns: 1fr auto;
+  }
+  .panier-ligne .prix {
+    text-align: left;
+  }
+}
+/* Admin */
+.admin-bloc {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  animation: apparition 0.4s ease;
+}
+.admin-bloc h2 {
+  margin-bottom: 16px;
+}
+.admin-bloc .btn {
+  margin-top: 4px;
+}
+.succes {
+  margin-bottom: 8px;
+  color: var(--teal);
+  font-weight: 600;
+  animation: apparition 0.2s ease;
+}
+
+.admin-liste {
+  list-style: none;
+}
+.admin-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #dddddd;
+}
+.admin-ligne h3 {
+  font-size: 1.05rem;
+}
+.admin-stock {
+  display: flex;
+  gap: 10px;
+}
+.champ-mini {
+  width: 110px;
+  padding: 8px 10px;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.champ-mini.champ-ok {
+  border-color: var(--teal);
+}
+.champ-mini.champ-erreur {
+  border-color: var(--tomato);
+}
+/* Tunnel de commande */
+.etapes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  list-style: none;
+  margin-bottom: 24px;
+}
+.etapes li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999999;
+  transition: color 0.3s;
+}
+.etapes li span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #cccccc;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.etapes li.courante {
+  color: var(--noir);
+  font-weight: 700;
+}
+.etapes li.courante span {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+.etapes li.faite {
+  color: var(--teal);
+}
+.etapes li.faite span {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--blanc);
+}
+
+.etape-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+.etape-actions .btn {
+  text-decoration: none;
+  text-align: center;
+}
+.formulaire .etape-actions .btn {
+  width: auto;
+  margin-top: 0;
+}
+
+.recap-bloc {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  animation: apparition 0.4s ease;
+}
+.recap-bloc h2 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+.recap-liste {
+  list-style: none;
+}
+.recap-liste li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #dddddd;
+}
+.recap-total {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 1.2rem;
+}
+.recap-total strong {
+  color: var(--teal);
+}
+.lien-modifier {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.choix-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.choix {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 2px solid #cccccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.choix input {
+  accent-color: var(--teal);
+}
+.choix.actif {
+  border-color: var(--teal);
+  background: rgba(0, 128, 128, 0.08);
+}
+
+.succes-commande {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  animation: apparition 0.5s ease;
+}
+.succes-commande strong {
+  color: var(--teal);
+}
